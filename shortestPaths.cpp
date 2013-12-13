@@ -1,4 +1,5 @@
-  #include <iostream>
+
+#include <iostream>
 #include <fstream>
 #include <stdlib.h>
 #include <stdio.h>
@@ -26,7 +27,6 @@ void Dijkstra(Graph g);
 
 
 int main(int argc, char *argv[]){
-
    ifstream fin;
    char* fileName = argv[1];
    Graph graph;
@@ -36,7 +36,7 @@ int main(int argc, char *argv[]){
    fin.open(fileName);
    if(fin.is_open()){
       cout << fileName << " opened successfully!" << endl;
-   }
+   } 
    else{
       cout << fileName << " failed to open." << endl;
    }
@@ -47,7 +47,7 @@ int main(int argc, char *argv[]){
 
    while(fin.tellg() != fileLength){
       char c = fin.peek();
-
+      
       if(c == '#'){
          fin.ignore(256, '\n');
       }
@@ -69,7 +69,7 @@ int main(int argc, char *argv[]){
          fin >> tempNode.name;
          fin >> tempEdge.terminalNode;
          fin >> tempEdge.weight;
-
+         
          if(graph.nodeList.empty()){
             tempNode.adjacencyList.push_back(tempEdge);
             graph.nodeList.push_back(tempNode);
@@ -86,7 +86,6 @@ int main(int argc, char *argv[]){
             }
             else
                for(int i = 0; i<graph.nodeList.size(); ++i){
-        
                   if(graph.nodeList[i].name == tempNode.name)
                      graph.nodeList[i].adjacencyList.push_back(tempEdge);
             }
@@ -106,22 +105,15 @@ int main(int argc, char *argv[]){
          cout << graph.nodeList[i].adjacencyList[j].terminalNode << ' ';
          cout << graph.nodeList[i].adjacencyList[j].weight << endl;
       }
-
-   }
+      
+   }   
 
    Dijkstra(graph);
    return 0;
 }
 
 void Dijkstra(Graph g){
-   Node source = g.nodeList[0];
-   Node nextNode;
-   int currentMin;
-   for(int i = 0; i < g.nodeList.size(); ++i){
-      for(j = 0; j < g.nodeList[i].adjacencyList.size(); ++j)
-
-   }
    cout << "Dijkstra" << endl;
-   cout << "Source : " << source.name << endl;
+   cout << "Source : " << g.nodeList[0].name << endl;
    cout << "End Dijkstra" << endl;
 }
